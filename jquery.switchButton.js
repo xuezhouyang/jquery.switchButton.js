@@ -11,7 +11,7 @@ License: http://opensource.org/licenses/MIT
 */
 (function ($) {
 
-    $.fn.switchButton = function (callback) {
+    $.fn.switchButton = function (callback1, callback2) {
 
         return this.each(function () {
 
@@ -38,19 +38,17 @@ License: http://opensource.org/licenses/MIT
                 if (switchState14322810757451y6s7djjbae8qo9k) {
                     $(this).stop();
                     $(".switchContent" + randomSwitchButtonSalt).siblings('input[type="checkbox"]').attr('checked', false);
-                    $(this).animate({marginLeft: "-50px"}, 300);
+                    $(this).animate({marginLeft: "-50px"}, { duration: 300, queue: false, complete: function() { if(callback1){callback1();} }});
                     switchState14322810757451y6s7djjbae8qo9k = false;
                 }else{
                     $(this).stop();
                     $(".switchContent" + randomSwitchButtonSalt).siblings('input[type="checkbox"]').attr('checked', true);
-                    $(this).animate({marginLeft: "0px"}, 300);
+                    $(this).animate({marginLeft: "0px"}, { duration: 300, queue: false, complete: function() { if(callback2){callback2();} }});
                     switchState14322810757451y6s7djjbae8qo9k = true;
                 }
-            });
+            }); 
 
-            if(callback){
-                callback();
-            }
+            if(callback1){callback1();}
 
         });
 
